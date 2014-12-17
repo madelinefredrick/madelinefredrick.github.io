@@ -4,6 +4,20 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	 
+	<style>
+		h1 {
+			font-size: 100px;
+		}
+	
+		.btn-huge {
+			padding: 100px;
+			font-size: 200px;
+			line-height: 1.33;
+			border-radius: 30px;
+		}
+
+	</style>
+	 
 	<script>
 	 
 		var timer = 30;
@@ -94,8 +108,7 @@
 				  $('#displayImage').hide();
 				  showPrompt();
 				  timer = 30;
-			   } else if (timer % 5 == 0 ) {
-					//hideImage();
+			   } else if (timer % 5 == 0 ) {					
 					changeImage();
 					//$('#displayImage').hide();
 					//animateShowImage();
@@ -117,10 +130,10 @@
     <img id="displayImage" width="100%">
     <div id="prompt" style="display: block; height: 500px;">
 		<h1>Did you take a bite?</h1>
-		<button type="button" class="btn btn-primary btn-lg" >yes</button>
+		<button type="button" class="btn btn-primary btn-huge"> yes</button>
 	</div>
 	
-	<form role="form">
+	<form role="form" style="padding-top:800px">
 	  <div class="form-group">
 		<label for="word1">Search Word</label>
 		<input type="text" class="form-control" id="word1" value="Puppy">
@@ -179,7 +192,7 @@
 	  </div>
 	  <div class="form-group">
 		<label for="word15">Search Word</label>
-		<input type="text" class="form-control" id="word15" value="Animal">
+		<input type="text" class="form-control" id="word15" value="Monkey">
 	  </div>	  
 	</form>
 	
