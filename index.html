@@ -1,1 +1,185 @@
-Hello World
+<html>
+  <head>
+    <title>Let's Eat</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	 
+	<script>
+	 
+		var timer = 30;
+		$( document ).ready(function() {
+			changeImage();
+			$('#prompt').hide();
+			$('#prompt button').click(function() {
+				$('#prompt').hide();
+				showImage();
+			});
+			showImage();
+		});
+
+	 
+		function showPrompt() {
+			$('#prompt').show();
+			changeImage();
+		}
+	
+		function showImage() {
+			animateShowImage();
+			hideImage();
+		};
+		
+		function animateShowImage() {
+			var effect = Math.ceil(Math.random() * 4);
+			if (effect == 1)  {
+				console.log("show");
+				$('#displayImage').show("slow");
+			} else if (effect == 2) {
+				console.log("slideDown");
+				$('#displayImage').slideDown("slow");
+			} else if (effect == 3) {
+				console.log("fadeIn");
+				$('#displayImage').fadeIn("slow");
+			} else {
+				console.log("slideUp");
+				//$('#displayImage').slideUp("slow");
+				$('#displayImage').fadeIn("slow");
+			}
+		
+		}
+		
+		function changeImage() {
+		
+			var searchIndex = Math.ceil(Math.random() * 15);
+			var searchWord = $("input#word" + searchIndex).val();
+			if (Math.random() < 0.3) {
+				searchWord = searchWord.concat(" animated gif");
+			}
+		
+			while (Math.random() >= 0.3) {
+				searchIndex = Math.ceil(Math.random() * 15);
+				searchWord = searchWord.concat(" " + $("input#word" + searchIndex).val());
+				console.log("searchIndex: " + searchIndex);
+				console.log("searchWord: " + searchWord);
+				if (Math.random() >= 0.7) {
+					searchWord = searchWord.concat(" animated gif");
+				}
+			}
+		
+		
+			$.ajax({
+			  dataType: "jsonp",
+			  url: 'http://ajax.googleapis.com/ajax/services/search/images',
+			  data: {
+				v: "1.0",
+				rsz: 8,
+				q: searchWord,
+				safe: "active",
+				start: 4
+			  },
+			  success: function ( json ) {
+				var rand = Math.floor(Math.random() * json.responseData.results.length),
+					results = json.responseData.results;
+				
+				$('#displayImage').attr('src', results[rand].url);
+			  }
+			});			
+		}
+		
+		function hideImage(){
+			setTimeout(function(){
+			   timer--;
+			   if(timer==0){
+				  $('#displayImage').hide();
+				  showPrompt();
+				  timer = 30;
+			   } else if (timer % 5 == 0 ) {
+					//hideImage();
+					changeImage();
+					$('#displayImage').hide();
+					//animateShowImage();
+			   } else {
+				  hideImage();
+			   }
+			}, 1000);
+		}
+		
+	</script>	
+	 
+	 
+	 
+  </head>
+  
+  
+  <body>
+    <img id="displayImage" width="100%">
+    <div id="prompt" style="display: block; height: 500px;">
+		<h1>Did you take a bite?</h1>
+		<button type="button" class="btn btn-primary btn-lg" >yes</button>
+	</div>
+	
+	<form role="form">
+	  <div class="form-group">
+		<label for="word1">Search Word</label>
+		<input type="text" class="form-control" id="word1" value="Puppy">
+	  </div>
+	  <div class="form-group">
+		<label for="word2">Search Word</label>
+		<input type="text" class="form-control" id="word2" value="Happy">
+	  </div>
+	  <div class="form-group">
+		<label for="word3">Search Word</label>
+		<input type="text" class="form-control" id="word3" value="Kitten">
+	  </div>
+	  <div class="form-group">
+		<label for="word4">Search Word</label>
+		<input type="text" class="form-control" id="word4" value="Silly">
+	  </div>
+	  <div class="form-group">
+		<label for="word5">Search Word</label>
+		<input type="text" class="form-control" id="word5" value="Cute">
+	  </div>	  
+	  <div class="form-group">
+		<label for="word6">Search Word</label>
+		<input type="text" class="form-control" id="word6" value="Funny">
+	  </div>
+	  <div class="form-group">
+		<label for="word7">Search Word</label>
+		<input type="text" class="form-control" id="word7" value="Baby">
+	  </div>
+	 <div class="form-group">
+		<label for="word8">Search Word</label>
+		<input type="text" class="form-control" id="word8" value="Pet">
+	  </div>
+	  <div class="form-group">
+		<label for="word9">Search Word</label>
+		<input type="text" class="form-control" id="word9" value="Disney">
+	  </div>
+	  <div class="form-group">
+		<label for="word10">Search Word</label>
+		<input type="text" class="form-control" id="word10" value="Cartoon">
+	  </div>
+	  <div class="form-group">
+		<label for="word11">Search Word</label>
+		<input type="text" class="form-control" id="word11" value="Dance">
+	  </div>
+	  <div class="form-group">
+		<label for="word12">Search Word</label>
+		<input type="text" class="form-control" id="word12" value="Crazy">
+	  </div>
+	  <div class="form-group">
+		<label for="word13">Search Word</label>
+		<input type="text" class="form-control" id="word13" value="Princess">
+	  </div>
+	  <div class="form-group">
+		<label for="word14">Search Word</label>
+		<input type="text" class="form-control" id="word14" value="Fairy">
+	  </div>
+	  <div class="form-group">
+		<label for="word15">Search Word</label>
+		<input type="text" class="form-control" id="word15" value="Animal">
+	  </div>	  
+	</form>
+	
+	</body>
+
+</html>
