@@ -48,11 +48,17 @@
 		}
 		
 		function changeImage() {
+			var requestData = {v: "1.0"};
+			requestData.rsz = 8;
+			requestData.safe = "active";
+			requestData.start = Math.ceil(Math.random() * 20);
+		
 		
 			var searchIndex = Math.ceil(Math.random() * 15);
 			var searchWord = $("input#word" + searchIndex).val();
 			if (Math.random() < 0.3) {
-				searchWord = searchWord.concat(" animated gif");
+				searchWord = searchWord.concat(" 'animated gif'");
+				requestData.as_filetype="gif";
 			}
 		
 			while (Math.random() >= 0.3) {
@@ -61,21 +67,17 @@
 				console.log("searchIndex: " + searchIndex);
 				console.log("searchWord: " + searchWord);
 				if (Math.random() >= 0.7) {
-					searchWord = searchWord.concat(" animated gif");
+					searchWord = searchWord.concat(" 'animated gif'");
+					requestData.as_filetype="gif";
 				}
 			}
-		
-		
+
+			requestData.q = searchWord;
+			
 			$.ajax({
 			  dataType: "jsonp",
 			  url: 'http://ajax.googleapis.com/ajax/services/search/images',
-			  data: {
-				v: "1.0",
-				rsz: 8,
-				q: searchWord,
-				safe: "active",
-				start: 4
-			  },
+			  data: requestData,
 			  success: function ( json ) {
 				var rand = Math.floor(Math.random() * json.responseData.results.length),
 					results = json.responseData.results;
